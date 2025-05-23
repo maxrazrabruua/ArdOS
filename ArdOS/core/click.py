@@ -3,21 +3,23 @@ from core.timens import Timer
 
 lang = "en"
 
-def getOfIndex(x: object, y: list):
+def getOfIndex(x: object, y: list, z: list):
     i = -1
-    for j in y:
+    for j, w in zip(y, z):
         i += 1
-        if x == j:
-            return y[i]
+        if x == w:
+            if z[y.index(y[i])] == x:
+                print(repr(z[y.index(y[i])]), repr(x))
+                return y[i]
+    print(repr(x))
     return x
 
 def liter(key: str):
     enkeys = list("`1234567890-=qwertyuiop[]asdfghjkl;'\\zxcvbnm,./ ")
     rukeys = list("ё1234567890-=йцукенгшщзхъфывапролджэ\\ячсмитьбю. ")
-    if lang == "en":
-        return getOfIndex(key, enkeys)
-    else:
-        return getOfIndex(key, rukeys)
+    if lang != "en":
+        return getOfIndex(key, rukeys, enkeys)
+    return key
 
 def upen(key: str):
     dr = list("`1234567890-=qwertyuiop[]asdfghjkl;'\\zxcvbnm,./ ")
