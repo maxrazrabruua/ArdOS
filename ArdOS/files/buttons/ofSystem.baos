@@ -1,7 +1,0 @@
-files/system/images/ofSystem.png
-10, 10; 53, 77
-self.activity = True
-**
-self()
-**
-wins.go("ofSystem", self.add['meneger'])
