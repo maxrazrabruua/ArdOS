@@ -187,7 +187,7 @@ class Window:
                 if self.focus:
                     pycode = "focus"
                     exec(self.focusScript)
-            except ValueError as e:
+            except Exception as e:
                 self.main = "self()"
                 self.init = "self()"
                 self.script = [
