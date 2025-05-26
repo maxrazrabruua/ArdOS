@@ -1,0 +1,44 @@
+0, 64, 0; 255, 255, 255; 0, 127, 0; 255, 255, 255
+Выполнить программу...
+100, 100; 300, 100
+[
+    {
+        "command": "image",
+        "args": [
+            (0, 15),
+            (50, 50),
+            "files/system/images/run.png"
+        ]
+    },
+    {
+        "command": "text",
+        "args": [
+            (60, -30),
+            24,
+            "",
+            (0, 0, 0)
+        ]
+    }
+]
+**
+self.activity = True
+self.local['input'] = click.Input()
+self.local['timer'] = Timer(0.01)
+self.local['ins'] = Ins()
+**
+self()
+**
+if self.local['timer']():
+   out = self.local['input']()
+   if len(self.local['input'].text) > 16:
+       self.local['input'].text = ''
+   if out:
+       try:
+           wins.go(out, self.add['meneger'])
+       except Exception as e:
+           wins.error('Запуск не удался', 'Проверьте существует ли данное окно, если существует проверьте его код', (0, 50), self.add['meneger'])
+           self.local['ins'].write('log', f'{e.__class__.__name__}: {str(e)}')
+   self.content[1]['args'][2] = self.local['input'].text
+   self.local['timer'] = Timer(0.01)
+**
+pass
