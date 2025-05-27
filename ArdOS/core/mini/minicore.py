@@ -18,7 +18,7 @@ def bsodcall(text: str):
             if event.type == pg.QUIT:
                 running = False
         time.sleep(0.1)
-    screen.quit()
+    nanogui.pg.quit()
     run = True
     print("Вызвана консоль")
     while run:
