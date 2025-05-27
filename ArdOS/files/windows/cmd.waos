@@ -1,0 +1,46 @@
+64, 64, 64; 0, 0, 0; 127, 127, 127; 255, 255, 255
+Терминал
+200, 200; 550, 300
+[
+    {
+        "command": "text",
+        "args": [
+            (0, 0),
+            24,
+            ""
+        ]
+    }
+]
+**
+self.activity = True
+self.local['input'] = click.Input()
+self.local['timer'] = Timer(0.01)
+self.local['index'] = 0
+**
+self()
+**
+def echo(text, self=self):
+   self.content.append({'command': 'text', 'args': [(0, 0), 24, text]})
+   self.local['index'] += 1
+if self.local['timer']():
+   ic = self.local['input']()
+   if not ic:
+       self.local['timer'] = Timer(0.01)
+       self.content[self.local['index']]['args'][2] = self.local['input'].text
+   else:
+        if self.local['index'] != 8:
+            self.content[self.local['index']]['args'][2] = ic
+            j = False
+            try:
+                exec(ic)
+            except Exception as e:
+                j = True
+                self.content.append({'command': 'text', 'args': [(0, 0), 24, f"{e.__class__.__name__}: {str(e)}"]})
+            self.local['index'] += 2 if j else 1
+            self.content.append({'command': 'text', 'args': [(0, 0), 24, '']})
+        else:
+            self.local['index'] = 0
+            self.content.clear()
+            self.content.append({'command': 'text', 'args': [(0, 0), 24, '']})
+**
+pass
