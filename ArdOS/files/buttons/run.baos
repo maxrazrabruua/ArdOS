@@ -1,0 +1,7 @@
+files/system/images/run.png
+10, 202; 81, 81
+self.activity = True
+**
+self()
+**
+wins.go("runner", self.add['meneger'])
