@@ -206,7 +206,7 @@ try:
                     "\n".join(["self()"]),
                     "\n".join([
                         "def echo(text, self=self):",
-                        "   self.content.append({'command': 'text', 'args': [(0, 0), 24, text]})",
+                        "   self.content.append({'command': 'text', 'args': [(0, 0), 24, str(text)]})",
                         "   self.local['index'] += 1",
                         "if self.local['timer']():",
                         "   ic = self.local['input']()",
