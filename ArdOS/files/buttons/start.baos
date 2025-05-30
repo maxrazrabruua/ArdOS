@@ -1,7 +1,0 @@
-files/system/images/buttonStartIcon.png
-10, 510; 81, 81
-self.activity = True
-**
-self()
-**
-wins.go("start", self.add['meneger'])
