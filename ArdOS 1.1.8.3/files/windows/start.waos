@@ -1,0 +1,28 @@
+0, 127, 0; 255, 255, 255; 0, 255, 0; 255, 255, 255
+Меню пуск
+10, 150; 250, 340
+[
+    {
+        "command": "button",
+        "args": [
+            (0, 250),
+            (223, 75),
+            "files/system/images/offButton.png",
+            "button",
+            (
+                "self.activity = True",
+                "self()",
+                "system.exit()"
+            )
+        ]
+    }
+]
+**
+self.activity = True
+self.movable = False
+**
+self()
+**
+pass
+**
+pass

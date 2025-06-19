@@ -1,0 +1,104 @@
+0, 127, 127; 255, 255, 255; 0, 255, 255; 255, 255, 255
+Плеер
+100, 100; 300, 200
+[
+    {
+        "command": "image",
+        "args": [
+            (85, 0),
+            (100, 100),
+            "files/system/images/music.png"
+        ],
+        "args2": [
+            (0, 185, 185),
+            5
+        ]
+    },
+    {
+        "command": "text",
+        "args": [
+            (105, 10),
+            24,
+            "",
+            (0, 255, 255)
+        ]
+    },
+    {
+        "command": "button",
+        "args": [
+            (0, -10),
+            (50, 50),
+            "files/system/images/left.png",
+            "left",
+            (
+                "self.activity = True\nself.local['timer'] = Timer(0.2)",
+                "self()",
+                '\n'.join([
+                    "if self.local['timer']():",
+                    "   window = self.add['window']",
+                    "   files = window.local['f']()",
+                    "   if window.local['last']:",
+                    "       window.local['last'].stop()",
+                    "   if window.local['i'] == 0:",
+                    "       window.local['i'] = len(files) - 1",
+                    "   else:",
+                    "       window.local['i'] -= 1",
+                    "   window.local['last'] = pg.mixer.Sound(files[window.local['i']])",
+                    "   window.local['last'].play()",
+                    "   name = files[window.local['i']].split('/')[-1]",
+                    "   window.content[1]['args'][2] = files[window.local['i']].split('/')[-1]",
+                    "   window.content[1]['args'][0] = (150 - (len(name) * 5), 10)",
+                    "   self.local['timer'] = Timer(0.2)"
+                ])
+            )
+        ]
+    },
+    {
+        "command": "button",
+        "args": [
+            (230, -257),
+            (50, 50),
+            "files/system/images/right.png",
+            "right",
+            (
+                "self.activity = True\nself.local['timer'] = Timer(0.2)",
+                "self()",
+                '\n'.join([
+                    "if self.local['timer']():",
+                    "   window = self.add['window']",
+                    "   files = window.local['f']()",
+                    "   if window.local['last']:",
+                    "       window.local['last'].stop()",
+                    "   if window.local['i'] == len(files) - 1:",
+                    "       window.local['i'] = 0",
+                    "   else:",
+                    "       window.local['i'] += 1",
+                    "   window.local['last'] = pg.mixer.Sound(files[window.local['i']])",
+                    "   window.local['last'].play()",
+                    "   name = files[window.local['i']].split('/')[-1]",
+                    "   window.content[1]['args'][2] = files[window.local['i']].split('/')[-1]",
+                    "   window.content[1]['args'][0] = (150 - (len(name) * 5), 10)",
+                    "   self.local['timer'] = Timer(0.2)"
+                ])
+            )
+        ]
+    }
+]
+**
+self.activity = True
+import os
+self.local['os'] = os
+def files(os = self.local['os']):
+    folder = 'files/sounds/'
+    a = os.listdir(folder)
+    b = [os.path.join(folder, f) for f in a if os.path.isfile(os.path.join(folder, f))]
+    return b
+self.local['f'] = files
+self.local['last'] = None
+self.local['i'] = 0
+**
+self()
+**
+pass
+**
+pass

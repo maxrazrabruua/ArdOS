@@ -1,0 +1,26 @@
+127, 0, 127; 255, 255, 255; 255, 0, 255; 255, 255, 255
+Скорость Включения Системы
+100, 100; 500, 100
+[
+    {
+        "command": "text",
+        "args": [
+            (0, 0),
+            128,
+            "",
+            (255, 0, 255)
+        ]
+    }
+]
+**
+self.activity = True
+**
+self()
+a = int((system.realTime - system.bootTime) * 1000) % 1000
+b = int((system.realTime - system.bootTime)) % 60
+c = int((system.realTime - system.bootTime) / 60)
+self.content[0]['args'][2] = str(c) + ':' + str(b) + ':' + str(a)
+**
+pass
+**
+pass

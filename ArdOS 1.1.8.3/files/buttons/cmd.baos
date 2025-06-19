@@ -1,0 +1,7 @@
+files/system/images/cmdIcon.png
+10, 101; 81, 81
+self.activity = True
+**
+self()
+**
+wins.go("cmd", self.add['meneger'])
