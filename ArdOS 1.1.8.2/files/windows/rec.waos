@@ -1,0 +1,43 @@
+127, 0, 0; 255, 255, 255; 255, 0, 0; 255, 255, 255
+REC-переключатель
+100, 100; 300, 300
+[
+    {
+        "command": "image",
+        "args": [
+            (75, 0),
+            (128, 128),
+            "files/system/images/RecOff.png"
+        ]
+    },
+    {
+        "command": "button",
+        "args": [
+            (0, 90),
+            (280, 64),
+            "files/system/images/reRec.png",
+            "button",
+            (
+                "self.activity = True\nself.local['t'] = Timer(0.33)",
+                "self()",
+                "\n".join([
+                    "if self.local['t']():",
+                    "   system.screenshoting = not system.screenshoting",
+                    "   self.local['t'] = Timer(0.33)"
+                ])
+            )
+        ]
+    }
+]
+**
+self.activity = True
+**
+self()
+if system.screenshoting:
+    self.content[0]['args'][2] = "files/system/images/RecOn.png"
+else:
+    self.content[0]['args'][2] = "files/system/images/RecOff.png"
+**
+pass
+**
+pass

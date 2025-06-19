@@ -1,0 +1,153 @@
+0, 127, 127; 255, 255, 255; 0, 255, 255; 255, 255, 255
+Видеоплеер
+100, 100; 750, 450
+[
+    {
+        "command": "image",
+        "args": [
+            (85, 0),
+            (534, 300),
+            "files/system/images/music.png"
+        ],
+        "args2": [
+            (0, 185, 185),
+            5
+        ]
+    },
+    {
+        "command": "text",
+        "args": [
+            (105, 10),
+            24,
+            "ЗАГЛУШКА",
+            (255, 255, 255)
+        ]
+    },
+    {
+        "command": "button",
+        "args": [
+            (0, -10),
+            (100, 100),
+            "files/system/images/left.png",
+            "left",
+            (
+                "self.activity = True\nself.local['timer'] = Timer(0.2)",
+                "self()",
+                '\n'.join([
+                    "if self.local['timer']():",
+                    "   window = self.add['window']",
+                    "   window.local['buttonRun'] = True",
+                    "   os = window.local['os']",
+                    "   json = window.local['json']",
+                    "   try:",
+                    "       os.remove('files/cash/' + window.local['name'])",
+                    "   except:",
+                    "       pass",
+                    "   if window.local['i'] == 0:",
+                    "       window.local['i'] = len(window.local['f']()) - 1",
+                    "   else:",
+                    "       window.local['i'] -= 1",
+                    "   try:",
+                    "       file = window.local['f']()[window.local['i']]",
+                    "   except:",
+                    "       print('a')",
+                    "       print(window.local['f']())",
+                    "       print(window.local['i'])",
+                    "       print(len(window.local['f']()))",
+                    "       print(window.local['i'] == len(window.local['f']()))",
+                    "   window.local['name'] = ''.join(file[:-4].split('/')[2:])",
+                    "   zipl.unPack(file, 'files/cash/videoplayer')",
+                    "   window.cash['images'].clear()",
+                    "   with open('files/cash/videoplayer/' + window.local['name'] + '/config.json', 'r', encoding='utf-8') as file:",
+                    "       window.local['data'] = json.load(file)"
+                ])
+            )
+        ]
+    },
+    {
+        "command": "button",
+        "args": [
+            (630, -458),
+            (100, 100),
+            "files/system/images/right.png",
+            "right",
+            (
+                "self.activity = True\nself.local['timer'] = Timer(0.2)",
+                "self()",
+                '\n'.join([
+                    "if self.local['timer']():",
+                    "   window = self.add['window']",
+                    "   window.local['buttonRun'] = True",
+                    "   os = window.local['os']",
+                    "   json = window.local['json']",
+                    "   try:",
+                    "       os.remove('files/cash/' + window.local['name'])",
+                    "   except:",
+                    "       pass",
+                    "   if window.local['i'] == len(window.local['f']()) - 1:",
+                    "       window.local['i'] = 0",
+                    "   else:",
+                    "       window.local['i'] += 1",
+                    "   try:",
+                    "       file = window.local['f']()[window.local['i']]",
+                    "   except:",
+                    "       print('a')",
+                    "       print(window.local['f']())",
+                    "       print(window.local['i'])",
+                    "       print(len(window.local['f']()))",
+                    "       print(window.local['i'] == len(window.local['f']()))",
+                    "   window.local['name'] = ''.join(file[:-4].split('/')[2:])",
+                    "   zipl.unPack(file, 'files/cash/videoplayer')",
+                    "   window.cash['images'].clear()",
+                    "   with open('files/cash/videoplayer/' + window.local['name'] + '/config.json', 'r', encoding='utf-8') as file:",
+                    "       window.local['data'] = json.load(file)"
+                ])
+            )
+        ]
+    }
+]
+**
+self.activity = True
+import os
+import json
+self.local['os'] = os
+self.local['json'] = json
+def files(os = self.local['os']):
+    folder = 'files/videos/'
+    a = os.listdir(folder)
+    b = [os.path.join(folder, f) for f in a if os.path.isfile(os.path.join(folder, f))]
+    return b
+self.local['f'] = files
+self.local['i'] = -1
+self.local['run'] = False
+self.local['frame'] = 0
+self.local['buttonRun'] = False
+self.local['data'] = {}
+self.local['timer'] = Timer(0)
+self.local['name'] = ''
+**
+if self.local['buttonRun']:
+    self.local['run'] = True
+    self.local['frame'] = 0
+    self.local['timer'] = Timer(1 / self.local['data']['fps'])
+    try:
+        a = pg.mixer.Sound('files/cash/videoplayer/' + self.local['name'] + '/sound.mp3')
+        a.play()
+    except:
+        pass
+    self.local['buttonRun'] = False
+
+if self.local['run']:
+    if self.local['timer']():
+        self.cash['images'].clear()
+        self.content[0]['args'][2] = 'files/cash/videoplayer/' + self.local['name'] + '/frames/' + str(self.local['frame']) + ".png"
+        self.local['frame'] += 1
+        if self.local['frame'] > self.local['data']['frames']:
+            self.local['run'] = False
+        self.local['timer'] = Timer(1 / self.local['data']['fps'])
+
+self()
+**
+pass
+**
+pass

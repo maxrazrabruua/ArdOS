@@ -1,0 +1,41 @@
+127, 127, 0; 255, 255, 255; 255, 255, 0; 127, 127, 0
+Кликер
+100, 100; 150, 100
+[
+    {
+        "command": "text",
+        "args": [
+            (0, 0),
+            30,
+            "",
+            (127, 127, 0)
+        ]
+    },
+    {
+        "command": "button",
+        "args": [
+            (0, 16),
+            (128, 16),
+            "files/system/images/buttonOfClicker.png",
+            "button",
+            (
+                "self.activity = True",
+                "self()",
+                "\n".join([
+                    "i = int(self.add['window'].content[0]['args'][2])",
+                    "i += 1",
+                    "self.add['window'].content[0]['args'][2] = str(i)"
+                ])
+            )
+        ]
+    }
+]
+**
+self.activity = True
+self.content[0]['args'][2] = "0"
+**
+self()
+**
+pass
+**
+pass
